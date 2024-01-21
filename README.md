@@ -1,4 +1,4 @@
-# ReactNativeAuthFlowTemplate
+# Time Tracker
 A template repository for setting up user authentication with Clerk.
 
 ## How To Contribute:
