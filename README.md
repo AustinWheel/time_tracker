@@ -1,5 +1,7 @@
 # Time Tracker
-A template repository for setting up user authentication with Clerk.
+A mobile app that will let you create activities and track the amount of time you have logged on them.
+This way you can track how long you spent at the gym, or even how long you spent cooking or reading!
+If you have any ideas/suggestions let me know at austinwheeler1112@gmail.com!
 
 ## How To Contribute:
 To get started
