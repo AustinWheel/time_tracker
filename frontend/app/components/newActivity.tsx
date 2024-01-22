@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import { Button, XStack, Input } from 'tamagui';
-import { Activity, Airplay } from '@tamagui/lucide-icons'
 import { green, greenA } from '../../assets/themes/colors';
+import { createActivity } from '../api/activitiesApi';
+import { useAuth } from '@clerk/clerk-expo';
+import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query';
 
-const NewActivity = (props) => {
+const NewActivity = () => {
+    const queryClient = useQueryClient();
+    const { getToken } = useAuth();
     const [name, setName] = useState('');
+    const addActivity = useMutation({
+        mutationFn: async () => {
+            const token = await getToken();
+            createActivity({"name": name}, token)
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey:['activities']});
+            console.log(`New activity created: ${name}`);
+            setName('');
+        },
 
-    const handleCreateActivity = () => {
-        console.log(`New activity created: ${name}`);
-    };
+    });
 
     const isDisabled = name.trim() === '';
 
@@ -25,7 +37,9 @@ const NewActivity = (props) => {
             />
             <Button
                 size="$4"
-                onPress={handleCreateActivity}
+                onPress={() => {
+                    addActivity.mutate();
+                }}
                 disabled={isDisabled}
                 style={[styles.button]}
             >
@@ -40,7 +54,6 @@ const NewActivity = (props) => {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        marginTop: 5,
     },
     button: {
         backgroundColor: green.green6,

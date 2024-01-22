@@ -1,7 +1,9 @@
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { YStack } from 'tamagui';
 import React, { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-expo';
 import NewActivity from '../components/newActivity';
+import { ListofActivities } from '../components/ListofActivities';
 
 const Home = () => {
     const { user } = useUser();
@@ -9,11 +11,12 @@ const Home = () => {
     return (
         <SafeAreaView style={styles.page}>
 
-        <View style={styles.container}>
-            <Text style={styles.text}>Welcome,</Text>
-            <Text style={styles.text} numberOfLines={1} ellipsizeMode='tail'>{user?.emailAddresses[0].emailAddress} 🎉</Text>
+        <YStack space="$4" style={styles.container}>
+            <Text style={styles.text}>Welcome,{"\n"}
+            <Text style={styles.text} numberOfLines={1} ellipsizeMode='tail'>{user?.emailAddresses[0].emailAddress} 🎉</Text></Text>
             <NewActivity />
-        </View>
+            <ListofActivities />
+        </YStack>
         </SafeAreaView>
     );
 };

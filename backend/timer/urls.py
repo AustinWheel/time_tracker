@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from . import views
-from activities.views import ActivityViewSet
+# from activities.views import ActivityViewSet
+from activities.views import UserActivitiesView
 
 router = routers.DefaultRouter()
-router.register(r'activities', ActivityViewSet)
+# router.register(r'activities', UserActivitiesView)
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
     path('admin/', admin.site.urls),
+    path("api/activities/", UserActivitiesView.as_view(), name="activities"),
 ]

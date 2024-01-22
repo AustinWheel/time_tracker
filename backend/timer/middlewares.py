@@ -6,6 +6,7 @@ import jwt
 import pytz
 import requests
 from django.contrib.auth.models import User
+from users.models import Profile
 from django.core.cache import cache
 from jwt.algorithms import RSAAlgorithm
 from rest_framework.authentication import BaseAuthentication
@@ -64,6 +65,7 @@ class JWTAuthenticationMiddleware(BaseAuthentication):
         user_id = payload.get("sub")
         if user_id:
             user, created = User.objects.get_or_create(username=user_id)
+            Profile.objects.get_or_create(user=user)
             return user
         return None
 
