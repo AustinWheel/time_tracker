@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { config } from '@tamagui/config/v2';
 import { TamaguiProvider, createTamagui } from 'tamagui'
 import { useFonts } from 'expo-font';
+import { TimerProvider } from '../src/context/TimerContext';
+import { Timer } from '@tamagui/lucide-icons';
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -63,13 +65,15 @@ declare module 'tamagui' {
 
 const RootLayout = () => {
   return (
-    <TamaguiProvider config={tamaguiConfig}>
-        <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
-            <QueryClientProvider client={queryClient}>
-                <InitialLayout />
-            </QueryClientProvider>
-        </ClerkProvider>
-    </TamaguiProvider>
+    <TimerProvider>
+        <TamaguiProvider config={tamaguiConfig}>
+            <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY} tokenCache={tokenCache}>
+                <QueryClientProvider client={queryClient}>
+                    <InitialLayout />
+                </QueryClientProvider>
+            </ClerkProvider>
+        </TamaguiProvider>
+    </TimerProvider>
   );
 };
 

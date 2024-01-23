@@ -1,6 +1,7 @@
 import { View, Text, Button, TextInput, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import { useUser } from '@clerk/clerk-expo';
+import { green } from '../../assets/themes/colors';
 
 const Profile = () => {
   const { user } = useUser();
@@ -9,7 +10,6 @@ const Profile = () => {
 
   const onSaveUser = async () => {
     try {
-      // This is not working!
       const result = await user.update({
         firstName: firstName,
         lastName: lastName,
@@ -29,7 +29,7 @@ const Profile = () => {
 
       <TextInput placeholder="First Name" value={firstName} onChangeText={setFirstName} style={styles.inputField} />
       <TextInput placeholder="Last Name" value={lastName} onChangeText={setLastName} style={styles.inputField} />
-      <Button onPress={onSaveUser} title="Update account" color={'#6c47ff'}></Button>
+      <Button onPress={onSaveUser} title="Update account" color={green.green10}></Button>
     </View>
   );
 };
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: '#6c47ff',
+    borderColor: green.green10,
     borderRadius: 4,
     padding: 10,
     backgroundColor: '#fff',

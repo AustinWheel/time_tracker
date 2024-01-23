@@ -3,6 +3,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { useAuth } from '@clerk/clerk-expo';
 import { green } from '../../assets/themes/colors';
+import { router } from 'expo-router';
+import { ChevronLeft } from '@tamagui/lucide-icons';
 
 export const LogoutButton = () => {
   const { signOut } = useAuth();
@@ -18,6 +20,18 @@ export const LogoutButton = () => {
   );
 };
 
+export const BackButton = () => {
+    const doBackPage = () => {
+        if (router.canGoBack()) router.back();
+    };
+  
+    return (
+            <Pressable onPress={doBackPage} style={{ marginRight: 10 }}>
+                <ChevronLeft size={24} color={'#000'} />
+            </Pressable>
+    );
+  };
+
 const TabsPage = () => {
   const { isSignedIn } = useAuth();
 
@@ -27,9 +41,8 @@ const TabsPage = () => {
         tabBarActiveTintColor: green.green11,
         headerStyle: {
           backgroundColor: '#fff',
-
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#000',
       }}>
       <Tabs.Screen
         name="home"
@@ -51,6 +64,16 @@ const TabsPage = () => {
         }}
         redirect={!isSignedIn}
       />
+        <Tabs.Screen
+            name="activity/[id]"
+            options={{
+                headerShown: true,
+                headerLeft: () => <BackButton />,
+                href: null,
+                headerStyle: {backgroundColor: "#fff"},
+            }}
+            redirect={!isSignedIn}
+        />
     </Tabs>
   );
 };

@@ -2,6 +2,7 @@ import { View, StyleSheet, TextInput, Button } from 'react-native';
 import React, { useState } from 'react';
 import { Stack } from 'expo-router';
 import { useSignIn } from '@clerk/clerk-expo';
+import { green } from '../../assets/themes/colors';
 
 const PwReset = () => {
   const [emailAddress, setEmailAddress] = useState('');
@@ -49,7 +50,7 @@ const PwReset = () => {
         <>
           <TextInput autoCapitalize="none" placeholder="simon@galaxies.dev" value={emailAddress} onChangeText={setEmailAddress} style={styles.inputField} />
 
-          <Button onPress={onRequestReset} title="Send Reset Email" color={'#6c47ff'}></Button>
+          <Button onPress={onRequestReset} title="Send Reset Email" color={green.green10}></Button>
         </>
       )}
 
@@ -59,7 +60,7 @@ const PwReset = () => {
             <TextInput value={code} placeholder="Code..." style={styles.inputField} onChangeText={setCode} />
             <TextInput placeholder="New password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
           </View>
-          <Button onPress={onReset} title="Set new Password" color={'#6c47ff'}></Button>
+          <Button onPress={onReset} title="Set new Password" color={green.green10}></Button>
         </>
       )}
     </View>
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: '#6c47ff',
+    borderColor: green.green10,
     borderRadius: 4,
     padding: 10,
     backgroundColor: '#fff',

@@ -1,11 +1,11 @@
 {
     "expo": {
-      "scheme": "acme",
+      "scheme": "TimeTracker",
       "web": {
         "bundler": "metro"
       },
-      "name": "clerkApp",
-      "slug": "clerkApp",
+      "name": "TimeTracker",
+      "slug": "TimeTracker",
       "plugins": [
         "expo-router"
       ]

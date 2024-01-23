@@ -3,6 +3,7 @@ import { Link } from 'expo-router';
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, Button, Pressable, Text, Alert } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { green } from '../../assets/themes/colors';
 
 const Login = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -38,7 +39,7 @@ const Login = () => {
       <TextInput autoCapitalize="none" placeholder="simon@galaxies.dev" value={emailAddress} onChangeText={setEmailAddress} style={styles.inputField} />
       <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
-      <Button onPress={onSignInPress} title="Login" color={'#6c47ff'}></Button>
+      <Button onPress={onSignInPress} title="Login" color={green.green10}></Button>
 
       <Link href="/reset" asChild>
         <Pressable style={styles.button}>
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: '#6c47ff',
+    borderColor: green.green10,
     borderRadius: 4,
     padding: 10,
     backgroundColor: '#fff',

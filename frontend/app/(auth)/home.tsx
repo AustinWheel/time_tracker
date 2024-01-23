@@ -10,13 +10,12 @@ const Home = () => {
 
     return (
         <SafeAreaView style={styles.page}>
-
-        <YStack space="$4" style={styles.container}>
-            <Text style={styles.text}>Welcome,{"\n"}
-            <Text style={styles.text} numberOfLines={1} ellipsizeMode='tail'>{user?.emailAddresses[0].emailAddress} 🎉</Text></Text>
-            <NewActivity />
-            <ListofActivities />
-        </YStack>
+            <YStack space="$4" style={styles.container}>
+                <Text style={styles.text}>Welcome,{"\n"}
+                <Text style={styles.text} numberOfLines={1} ellipsizeMode='tail'>{user?.emailAddresses[0].emailAddress} 🎉</Text></Text>
+                <NewActivity />
+                <ListofActivities />
+            </YStack>
         </SafeAreaView>
     );
 };

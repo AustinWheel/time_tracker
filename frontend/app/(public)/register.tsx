@@ -3,6 +3,7 @@ import { useSignUp } from '@clerk/clerk-expo';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { useState } from 'react';
 import { Stack } from 'expo-router';
+import { green } from '../../assets/themes/colors';
 
 const Register = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
@@ -69,7 +70,7 @@ const Register = () => {
           <TextInput autoCapitalize="none" placeholder="simon@galaxies.dev" value={emailAddress} onChangeText={setEmailAddress} style={styles.inputField} />
           <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
-          <Button onPress={onSignUpPress} title="Sign up" color={'#6c47ff'}></Button>
+          <Button onPress={onSignUpPress} title="Sign up" color={green.green10}></Button>
         </>
       )}
 
@@ -78,7 +79,7 @@ const Register = () => {
           <View>
             <TextInput value={code} placeholder="Code..." style={styles.inputField} onChangeText={setCode} />
           </View>
-          <Button onPress={onPressVerify} title="Verify Email" color={'#6c47ff'}></Button>
+          <Button onPress={onPressVerify} title="Verify Email" color={green.green10}></Button>
         </>
       )}
     </View>
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
     height: 50,
     borderWidth: 1,
-    borderColor: '#6c47ff',
+    borderColor: green.green10,
     borderRadius: 4,
     padding: 10,
     backgroundColor: '#fff',
