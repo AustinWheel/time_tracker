@@ -2,8 +2,8 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { YStack } from 'tamagui';
 import React, { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-expo';
-import NewActivity from '../components/newActivity';
-import { ListofActivities } from '../components/ListofActivities';
+import NewActivity from '../../src/components/newActivity';
+import { ListofActivities } from '../../src/components/ListofActivities';
 
 const Home = () => {
     const { user } = useUser();

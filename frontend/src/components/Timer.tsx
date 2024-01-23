@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, XStack } from 'tamagui';
 import { green } from '../../assets/themes/colors';
-import { Pause, Play, PlayCircle, TimerReset, Timer as TimeStart } from '@tamagui/lucide-icons';
-import { TimerContext } from '../../src/context/TimerContext';
+import { Download, Pause, Play, PlayCircle, TimerReset, Timer as TimeStart } from '@tamagui/lucide-icons';
+import { TimerContext } from '../context/TimerContext';
+import { useAuth } from '@clerk/clerk-expo';
+import { updateActivity } from '../api/activitiesApi';
 
 const Timer = () => {
-    const { selectedTime, setSelectedTime, initialTime } = useContext(TimerContext);
-
+    const { selectedTime, setSelectedTime, initialTime, setInitialTime } = useContext(TimerContext);
+    const { getToken } = useAuth();
     const [isRunning, setIsRunning] = useState(false);
 
     useEffect(() => {
@@ -34,7 +36,19 @@ const Timer = () => {
 
     const reset = () => {
         setIsRunning(false);
-        setSelectedTime(initialTime);
+        setSelectedTime(initialTime[0]);
+    }
+    const saveTime = async () => {
+        const token = await getToken();
+        const resp = await updateActivity({
+            id: initialTime[1],
+            time_logged: selectedTime
+        }, token);
+        if (resp.status === 200) {
+            setInitialTime([selectedTime, initialTime[1]]);
+        } else {
+            console.log(resp);
+        }
     }
 
     return (
@@ -80,6 +94,15 @@ const Timer = () => {
                     icon={<Pause size={35} color={green.green12} />}
                 >
                 </Button>
+                <Button 
+                    onPress={saveTime}
+                    borderColor={green.green12}
+                    backgroundColor={"#fff"}
+                    borderWidth={2}
+                    width={50}
+                    color={"#fff"}
+                    icon={<Download size={35} color={green.green12} />}
+                />
             </XStack>
         </View>
     )

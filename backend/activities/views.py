@@ -28,3 +28,27 @@ class UserActivitiesView(APIView):
         )
         activity.save()
         return Response(status=status.HTTP_201_CREATED)
+
+class ActivityView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        requested_id = request.data.get("id", None)
+        if requested_id is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        try:
+            activity = Activity.objects.get(id=requested_id, user=request.user.profile)
+            activity.time_logged = request.data.get("time_logged", activity.time_logged)
+            activity.save()
+            return Response(status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request):
+        requested_id = request.data.get("id", None)
+        if requested_id is None:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        activity = Activity.objects.get(id=requested_id, user=request.user.profile)
+        activity.delete()
+        return Response(status=status.HTTP_200_OK)
+    

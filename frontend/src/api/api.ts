@@ -30,4 +30,19 @@ const post = async (url, payload, token) => {
   }
 };
 
-export { get, post };
+const del = async (url, payload, token) => {
+    const apiUrl = `${URL}${url}`;
+    try {
+      const response = await axios.delete(apiUrl, {
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+          data: payload,
+      });
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+export { get, post, del };

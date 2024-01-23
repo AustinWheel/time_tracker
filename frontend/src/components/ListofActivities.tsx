@@ -1,19 +1,20 @@
 import React, { useState, useContext } from "react";
-import { ListItem, YStack, ScrollView, XStack, Separator, View } from "tamagui";
+import { ListItem, YStack, ScrollView, XStack, Separator, View, Button } from "tamagui";
 import { getActivities } from "../api/activitiesApi";
 import { useAuth } from "@clerk/clerk-expo";
 import { useQuery } from "@tanstack/react-query";
 import { StyleSheet, Text } from "react-native";
-import { ChevronRight, Scroll} from '@tamagui/lucide-icons';
-import { green, greenA } from "../../assets/themes/colors";
+import { ChevronRight, Delete, Scroll, Space, Trash2} from '@tamagui/lucide-icons';
+import { green, greenA, red } from "../../assets/themes/colors";
 import { Link, router } from "expo-router";
 import Timer from "./Timer";
 import { ActivityIndicator } from 'react-native';
-import { TimerContext } from "../../src/context/TimerContext";
+import { TimerContext } from "../context/TimerContext";
+import { DeleteDialog } from "./DeleteDialog";
 
 export const ListofActivities = () => {
     const { getToken } = useAuth();
-    const [intervalMs, setIntervalMs] = React.useState(5000);
+    const [intervalMs, setIntervalMs] = React.useState(1000);
     
     let {data, isLoading, isError} = useQuery({
         queryKey: ['activities'],
@@ -35,9 +36,8 @@ export const ListofActivities = () => {
                     <YStack space="$2" style={{backgroundColor: "#fff"}}>
                         {data.map((activity) => (
                             <ListItem
-                                iconAfter={<ChevronRight size={24} />}
                                 onPress={() => {
-                                    setInitialTime(activity.time_logged)
+                                    setInitialTime([activity.time_logged, activity.id])
                                     setSelectedTime(activity.time_logged)
                                 }}
                                 style={styles.container}
@@ -60,6 +60,11 @@ export const ListofActivities = () => {
                                         :{String((activity.time_logged % 3600) % 60).length < 2 ? "0" + (activity.time_logged % 3600) % 60 : (activity.time_logged % 3600) % 60 }
                                         </Text>
                                     </Text>
+                                    <View style={{flex:"1"}}/>
+                                        <DeleteDialog 
+                                            id={activity.id}
+                                            name={activity.name}
+                                        />
                                 </XStack>
                             </ListItem>
                         ))}

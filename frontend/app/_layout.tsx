@@ -7,7 +7,6 @@ import { config } from '@tamagui/config/v2';
 import { TamaguiProvider, createTamagui } from 'tamagui'
 import { useFonts } from 'expo-font';
 import { TimerProvider } from '../src/context/TimerContext';
-import { Timer } from '@tamagui/lucide-icons';
 
 const CLERK_PUBLISHABLE_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -16,6 +15,7 @@ const InitialLayout = () => {
         Munro: require('../assets/fonts/Munro.ttf'),
         MunroNarrow: require('../assets/fonts/MunroNarrow.ttf'),
         MunroSmall: require('../assets/fonts/MunroSmall.ttf'),
+        Inter: require('../assets/fonts/MunroSmall.ttf'),
     })
     const { isLoaded, isSignedIn } = useAuth();
     const segments = useSegments();

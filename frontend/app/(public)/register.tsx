@@ -9,6 +9,8 @@ const Register = () => {
   const { isLoaded, signUp, setActive } = useSignUp();
 
   const [emailAddress, setEmailAddress] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState('');
@@ -24,6 +26,8 @@ const Register = () => {
     try {
       // Create the user on Clerk
       await signUp.create({
+        firstName: firstName,
+        lastName: lastName,
         emailAddress,
         password,
       });
@@ -35,6 +39,7 @@ const Register = () => {
       setPendingVerification(true);
     } catch (err: any) {
       alert(err.errors[0].message);
+      console.error(JSON.stringify(err, null, 2));
     } finally {
       setLoading(false);
     }
@@ -67,6 +72,8 @@ const Register = () => {
 
       {!pendingVerification && (
         <>
+          <TextInput autoCapitalize="none" placeholder="First Name" value={firstName} onChangeText={setFirstName} style={styles.inputField} />
+          <TextInput autoCapitalize="none" placeholder="Last Name" value={lastName} onChangeText={setLastName} style={styles.inputField} />
           <TextInput autoCapitalize="none" placeholder="simon@galaxies.dev" value={emailAddress} onChangeText={setEmailAddress} style={styles.inputField} />
           <TextInput placeholder="password" value={password} onChangeText={setPassword} secureTextEntry style={styles.inputField} />
 
