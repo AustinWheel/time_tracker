@@ -36,3 +36,4 @@ yarn-error.*
 
 .env
 db.*
+package-lock.json
