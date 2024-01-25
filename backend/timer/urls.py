@@ -18,6 +18,7 @@ from django.urls import path, include
 from rest_framework import routers
 from . import views
 from activities.views import UserActivitiesView, ActivityView
+from users.views import UserProfileView
 
 router = routers.DefaultRouter()
 # router.register(r'users', views.UserViewSet)
@@ -27,4 +28,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("api/activities/", UserActivitiesView.as_view(), name="activities"),
     path("api/activities/activity/", ActivityView.as_view(), name="activity"),
+    path("api/users/profile/", UserProfileView.as_view(), name="profile"),
 ]

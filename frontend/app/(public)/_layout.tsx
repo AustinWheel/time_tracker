@@ -8,26 +8,28 @@ const PublicLayout = () => {
                 headerStyle: {
                     backgroundColor: "#fff",
                 },
-                headerTintColor: "#fff",
+                headerTintColor: "#000",
                 headerBackTitle: 'Back',
             }}
         >
             <Stack.Screen 
                 name="login"
                 options={{
-                    headerTitle: "Clerk Auth App",
+                    headerTitle: "Time Tracker",
                 }}
             />
             <Stack.Screen
                 name="register"
                 options={{
-                    headerBackTitle: "Create Account",
+                    headerBackTitle: "",
+                    headerTitle: "",
                 }}
             />
             <Stack.Screen
                 name="reset"
                 options={{
-                    headerBackTitle: "Reset Password",
+                    headerBackTitle: "",
+                    headerTitle: "",
                 }}
             />
 

@@ -61,19 +61,10 @@ const TabsPage = () => {
           tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color={color} />,
           tabBarLabel: 'My Profile',
           headerRight: () => <LogoutButton />,
+          headerShown: false,
         }}
         redirect={!isSignedIn}
       />
-        <Tabs.Screen
-            name="activity/[id]"
-            options={{
-                headerShown: true,
-                headerLeft: () => <BackButton />,
-                href: null,
-                headerStyle: {backgroundColor: "#fff"},
-            }}
-            redirect={!isSignedIn}
-        />
     </Tabs>
   );
 };

@@ -1,53 +1,27 @@
-import { Button, Separator, XStack } from 'tamagui'
-import { Trash2 } from '@tamagui/lucide-icons'
-import { red } from '../../assets/themes/colors'
-import React, { useState, useContext } from 'react'
-import { TimerContext } from '../context/TimerContext'
-import {
-Adapt,
-Dialog,
-Fieldset,
-Paragraph,
-Sheet,
-} from 'tamagui'
+import React, { useState } from 'react';
 import { useAuth } from '@clerk/clerk-expo';
-import { deleteActivity } from '../api/activitiesApi';
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { red } from '../../assets/themes/colors';
+import { ChevronRight, LogOut } from '@tamagui/lucide-icons';
+import { ListItem, Dialog, Sheet, Adapt, Button, XStack, Text } from 'tamagui';
 
-export function DeleteDialog({id, name}: any) {
+export const LogoutAccountDialog = () => {
     const [open, setOpen] = useState(false);
-    const { getToken } = useAuth();
-    const { initialTime, setInitialTime, setSelectedTime } = useContext(TimerContext);
+    const { signOut } = useAuth();
 
-
-    const queryClient = useQueryClient();
-    const deleteItem = useMutation({
-        mutationFn: async () => {
-            const token = await getToken();
-            deleteActivity({id: id}, token)
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({queryKey:['activities']});
-            console.log(`Activity deleted: ${name}`);
-            if (initialTime[1] === id) {
-                setInitialTime([0, null]);
-                setSelectedTime(0);
-            }
-        },
-    });
-
+    const doLogout = () => {
+        signOut();
+    };
     return (
         <Dialog
-        modal
-        onOpenChange={(open) => {
-            setOpen(open)
-        }}
+            modal
+            onOpenChange={(open) => {
+                setOpen(open)
+            }}
         >
-            <Dialog.Trigger alignSelf='center'>
-                <Trash2 
-                    size={40} 
-                    color={red.red10}
-                />
+            <Dialog.Trigger >
+                <ListItem fontSize={18} icon={LogOut} color={red.red10} iconAfter={ChevronRight}>
+                    <Text style={{ flex: 1,color: red.red10, fontSize: 18, alignSelf: "flex-start", verticalAlign: "middle"}}>Logout</Text>
+                </ListItem>
             </Dialog.Trigger>
             <Adapt platform="touch">
                 <Sheet zIndex={200000} modal dismissOnSnapToBottom>
@@ -80,7 +54,7 @@ export function DeleteDialog({id, name}: any) {
             <Dialog.Title
                 style={{ fontFamily: 'MunroSmall', fontSize: 35 }}
             >
-                Delete Activity
+                Logout
             </Dialog.Title>
 
             <Dialog.Description
@@ -91,21 +65,8 @@ export function DeleteDialog({id, name}: any) {
                     color: "gray",
                 }}
             >
-                Are you sure you want to delete this activity?
+                Are you sure you want to logout?
             </Dialog.Description>
-
-            <Fieldset gap="$4" horizontal alignSelf='center'>
-                <Separator alignSelf="stretch" vertical/>
-                <Paragraph style={{
-                    fontFamily: "MunroSmall",
-                    fontSize: 20,
-                    }}
-                >
-                    {name}
-                </Paragraph>
-                <Separator alignSelf="stretch" vertical/>
-
-            </Fieldset>
 
             <XStack alignSelf="center" gap="$3">
             <Dialog.Close displayWhenAdapted asChild>
@@ -123,19 +84,15 @@ export function DeleteDialog({id, name}: any) {
                     aria-label="Close" 
                     fontFamily='MunroSmall'
                     fontSize={20}
-                    color={red.red10}
                     fontWeight={"bold"}
-                    onPress={() => {
-                        deleteItem.mutate();
-                    }}
+                    color={red.red10}
+                    onPress={doLogout}
                 >
-                    Delete
+                    Logout
                 </Button>
                 </Dialog.Close>
             </XStack>
             </Dialog.Content>
         </Dialog.Portal>
-        </Dialog>
-
-    )
+    </Dialog>)
 }
