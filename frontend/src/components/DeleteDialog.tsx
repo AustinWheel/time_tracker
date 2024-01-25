@@ -45,7 +45,7 @@ export function DeleteDialog({id, name}: any) {
         >
             <Dialog.Trigger alignSelf='center'>
                 <Trash2 
-                    size={40} 
+                    size={25} 
                     color={red.red10}
                 />
             </Dialog.Trigger>
