@@ -8,6 +8,7 @@ Below are some images so you can see what the app looks like before it is availa
 ![Screenshot 2024-01-25 at 5 32 45 AM](https://github.com/AustinWheel/time_tracker/assets/114939170/d878a8e5-7235-4237-9221-3f8a839bb005)
 ![Screenshot 2024-01-25 at 5 33 15 AM](https://github.com/AustinWheel/time_tracker/assets/114939170/0bf495bf-d146-4a32-b1af-6694a340c593)
 ![Screenshot 2024-01-25 at 5 33 34 AM](https://github.com/AustinWheel/time_tracker/assets/114939170/6266e7e9-c0f0-4112-8152-ee816e016dea)
+<img width="559" alt="Screenshot 2024-01-25 at 11 51 59 PM" src="https://github.com/AustinWheel/time_tracker/assets/114939170/a628fe3d-4f63-4c14-aaad-66f0209a5d86">
 
 
 ## How To Contribute:
