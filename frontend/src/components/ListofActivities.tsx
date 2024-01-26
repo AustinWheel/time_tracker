@@ -11,6 +11,7 @@ import Timer from "./Timer";
 import { ActivityIndicator } from 'react-native';
 import { TimerContext } from "../context/TimerContext";
 import { DeleteDialog } from "./DeleteDialog";
+import { CalendarDialog } from "./activity_calendar/CalendarDialog";
 
 export const ListofActivities = () => {
     const { getToken } = useAuth();
@@ -61,6 +62,9 @@ export const ListofActivities = () => {
                                         </Text>
                                     </Text>
                                     <View style={{flex:"1"}}/>
+                                        <CalendarDialog 
+                                            data={activity.days}
+                                        />
                                         <DeleteDialog 
                                             id={activity.id}
                                             name={activity.name}

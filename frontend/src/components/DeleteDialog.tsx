@@ -28,7 +28,6 @@ export function DeleteDialog({id, name}: any) {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey:['activities']});
-            console.log(`Activity deleted: ${name}`);
             if (initialTime[1] === id) {
                 setInitialTime([0, null]);
                 setSelectedTime(0);

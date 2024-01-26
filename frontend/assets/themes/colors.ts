@@ -55,3 +55,13 @@ export const redA = {
     redA11: 'hsla(358, 99.8%, 38.3%, 0.832)',
     redA12: 'hsla(355, 99.3%, 7.9%, 0.926)',
 }
+
+export const LEVEL_COLOR = {
+    light: [
+      '#ebedf0',
+      '#9be9a8',
+      '#40c463',
+      '#30a14e',
+      '#216e39',
+    ],
+  };

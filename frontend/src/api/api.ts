@@ -9,10 +9,12 @@ const get = async (url, token) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      maxContentLength: 100000000,
+      maxBodyLength: 1000000000,
     });
     return response;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(JSON.stringify(err, null, 2));
   }
 };
 
@@ -23,10 +25,13 @@ const post = async (url, payload, token) => {
         headers: {
             Authorization: `Bearer ${token}`,
         },
+        maxContentLength: 100000000,
+        maxBodyLength: 1000000000
     });
     return response;
-  } catch (error) {
-    console.error(error);
+
+  } catch (err) {
+    console.error(JSON.stringify(err, null, 2));
   }
 };
 
@@ -37,11 +42,13 @@ const del = async (url, payload, token) => {
           headers: {
               Authorization: `Bearer ${token}`,
           },
+          maxContentLength: 100000000,
+          maxBodyLength: 1000000000,
           data: payload,
       });
       return response;
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(JSON.stringify(err, null, 2));
     }
   };
 

@@ -17,7 +17,6 @@ const NewActivity = () => {
         },
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey:['activities']});
-            console.log(`New activity created: ${name}`);
             setName('');
         },
 

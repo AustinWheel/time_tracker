@@ -47,7 +47,7 @@ const Timer = () => {
         if (resp.status === 200) {
             setInitialTime([selectedTime, initialTime[1]]);
         } else {
-            console.log(resp);
+            console.log(resp.status);
         }
     }
 

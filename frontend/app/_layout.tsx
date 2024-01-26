@@ -26,8 +26,6 @@ const InitialLayout = () => {
 
         const inTabsGroup = segments[0] === '(auth)';
 
-        console.log('User changed: ', isSignedIn);
-
         if (isSignedIn && !inTabsGroup) {
         router.replace('/home');
         } else if (!isSignedIn) {
