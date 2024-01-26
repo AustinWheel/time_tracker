@@ -4,13 +4,21 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Activity
+from .models import Activity, Day
 from rest_framework.permissions import IsAuthenticated
+from datetime import datetime
+
+class DaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Day
+        fields = ["id", "month", "day", "activity", "year", "actions"]
 
 class ActivitySerializer(serializers.ModelSerializer):
+    days = DaySerializer(many=True, read_only=True)
+
     class Meta:
         model = Activity
-        fields = ["id", "name", "time_logged", "user"]
+        fields = ["id", "name", "time_logged", "user", "days"]
         
 class UserActivitiesView(APIView):
     permission_classes = [IsAuthenticated]
@@ -40,6 +48,16 @@ class ActivityView(APIView):
             activity = Activity.objects.get(id=requested_id, user=request.user.profile)
             activity.time_logged = request.data.get("time_logged", activity.time_logged)
             activity.save()
+
+            now = datetime.now()
+            month = now.month
+            day = now.day
+            year = now.year
+
+            day_instance, created = Day.objects.get_or_create(month=month, day=day, year=year, activity=activity)
+            day_instance.actions += 1
+            day_instance.save()
+
             return Response(status=status.HTTP_200_OK)
         except:
             return Response(status=status.HTTP_400_BAD_REQUEST)
